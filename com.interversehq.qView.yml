@@ -64,6 +64,11 @@ modules:
               - type: archive
                 url: https://github.com/google/highway/archive/refs/tags/0.15.0.tar.gz
                 sha256: 4bbd4439eae08cf038f1c5cc5d9ebc6a1a50f2c610c13a1483adccacfa24c150
+            x-checker-data:
+              type: anitya
+              project-id: 205809
+              stable-only: true
+              url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
         sources:
           - type: git
             url: https://github.com/libjxl/libjxl.git
@@ -88,10 +93,6 @@ modules:
               project-id: 178015
               stable-only: true
               tag-template: v$version
-          - type: shell
-            commands:
-              - sed -i 's|DESTINATION ${GDK_PIXBUF_MODULEDIR}|DESTINATION /app/lib/gdk-pixbuf-2.0/2.10.0/loaders|'
-                contrib/gdk-pixbuf/CMakeLists.txt
 
       - name: karchive
         buildsystem: cmake-ninja
@@ -100,7 +101,7 @@ modules:
         sources:
           - type: archive
             url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
-            sha256: 503d33b247ae24260c73aac2c48601eb4f8be3f10c9149549ea5dd2d22082a2a
+            sha256: 3fa1fd34e6a9f90b00dc877e7e8bc0fe033ff6ad8693e78e9cee1c9e9f01b0b2
             x-checker-data:
               type: anitya
               project-id: 8762
@@ -108,8 +109,8 @@ modules:
               url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/karchive-$version.tar.xz
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
-        sha256: 78ced2665f8918beb617b74962d188dcbb01a92a90ba49bfd173671bdb14e68d
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.9/kimageformats-5.9.0.tar.xz
+        sha256: afae002076702bd4b5509a4cea43161d409bda6b2de6797023d9f90bc3cc9984
         x-checker-data:
           type: anitya
           project-id: 8762
