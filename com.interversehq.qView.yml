@@ -15,5 +15,5 @@ modules:
     buildsystem: qmake
     sources:
       - type: archive
-        url: https://github.com/jurplel/qView/archive/904f45e1c43f096e455a833c7fe0608459029d75.tar.gz
-        sha256: 97e43b4e0316b0675b1627fb45d474a058ad2a6fbc30061cd039eab46ed34d25
+        url: https://github.com/jurplel/qView/releases/download/5.0/qView-5.0.tar.gz
+        sha256: 2d09b0bd0c439aacbd02613b0dd5c2e9f8f5458739717f86288addcdb6225245
