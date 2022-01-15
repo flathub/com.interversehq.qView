@@ -105,7 +105,7 @@ modules:
               type: anitya
               project-id: 8762
               stable-only: true
-              url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/kimageformats-$version.tar.xz
+              url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/karchive-$version.tar.xz
     sources:
       - type: archive
         url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
