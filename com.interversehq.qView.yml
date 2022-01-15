@@ -11,6 +11,127 @@ finish-args:
   - --share=network
   - --device=dri
 modules:
+  - name: kimageformats
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+      - -DKIMAGEFORMATS_HEIF=ON
+    modules:
+      - name: libheif
+        config-opts:
+          - --disable-gdk-pixbuf
+        cleanup:
+          - /bin
+          - /share/man
+        modules:
+          - name: libde265
+            config-opts:
+              - --disable-sherlock265
+            cleanup:
+              - /bin
+            sources:
+              - type: archive
+                url: https://github.com/strukturag/libde265/releases/download/v1.0.8/libde265-1.0.8.tar.gz
+                sha256: 24c791dd334fa521762320ff54f0febfd3c09fc978880a8c5fbc40a88f21d905
+                x-checker-data:
+                  type: anitya
+                  project-id: 11239
+                  stable-only: true
+                  url-template: https://github.com/strukturag/libde265/releases/download/v$version/libde265-$version.tar.gz
+        sources:
+          - url: https://github.com/strukturag/libheif/releases/download/v1.12.0/libheif-1.12.0.tar.gz
+            sha256: e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718
+            type: archive
+            x-checker-data:
+              type: anitya
+              project-id: 64439
+              stable-only: true
+              url-template: https://github.com/strukturag/libheif/releases/download/v$version/libheif-$version.tar.gz
+
+      - name: libjxl
+        buildsystem: cmake-ninja
+        builddir: true
+        config-opts:
+          - -DBUILD_TESTING=OFF
+        cleanup:
+          - /bin
+        modules:
+          - name: highway
+            buildsystem: cmake
+            config-opts:
+              - -DBUILD_TESTING=OFF
+            sources:
+              - type: archive
+                url: https://github.com/google/highway/archive/refs/tags/0.15.0.tar.gz
+                sha256: 4bbd4439eae08cf038f1c5cc5d9ebc6a1a50f2c610c13a1483adccacfa24c150
+        sources:
+          - type: git
+            url: https://github.com/libjxl/libjxl.git
+            tag: v0.6.1
+            x-checker-data:
+              type: anitya
+              project-id: 232764
+              stable-only: true
+              tag-template: v$version
+
+      - name: openexr
+        config-opts:
+          - --disable-static
+        cleanup:
+          - /bin
+          - /share/doc
+        sources:
+          - type: archive
+            url: https://github.com/openexr/openexr/releases/download/v2.3.0/openexr-2.3.0.tar.gz
+            sha256: fd6cb3a87f8c1a233be17b94c74799e6241d50fc5efd4df75c7a4b9cf4e25ea6
+            x-checker-data:
+              type: anitya
+              project-id: 13289
+              stable-only: true
+              url-template: https://github.com/openexr/openexr/releases/download/v$version/openexr-$version.tar.gz
+
+      - name: libavif
+        buildsystem: cmake
+        config-opts:
+          - -DAVIF_BUILD_GDK_PIXBUF=OFF
+        sources:
+          - type: git
+            url: https://github.com/AOMediaCodec/libavif.git
+            tag: v0.9.3
+            commit: ac76fe0d16a255bccefff5bdfddd865742176d85
+            x-checker-data:
+              type: anitya
+              project-id: 178015
+              stable-only: true
+              tag-template: v$version
+          - type: shell
+            commands:
+              - sed -i 's|DESTINATION ${GDK_PIXBUF_MODULEDIR}|DESTINATION /app/lib/gdk-pixbuf-2.0/2.10.0/loaders|'
+                contrib/gdk-pixbuf/CMakeLists.txt
+
+      - name: karchive
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DBUILD_TESTING=OFF
+        sources:
+          - type: archive
+            url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
+            sha256: 503d33b247ae24260c73aac2c48601eb4f8be3f10c9149549ea5dd2d22082a2a
+            x-checker-data:
+              type: anitya
+              project-id: 8762
+              stable-only: true
+              url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/kimageformats-$version.tar.xz
+    sources:
+      - type: archive
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
+        sha256: 78ced2665f8918beb617b74962d188dcbb01a92a90ba49bfd173671bdb14e68d
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/kimageformats-$version.tar.xz
+
   - name: qview
     buildsystem: qmake
     sources:
