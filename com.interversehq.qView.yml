@@ -100,7 +100,7 @@ modules:
           - -DBUILD_TESTING=OFF
         sources:
           - type: archive
-            url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
+            url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.9/karchive-5.9.0.tar.xz
             sha256: 3fa1fd34e6a9f90b00dc877e7e8bc0fe033ff6ad8693e78e9cee1c9e9f01b0b2
             x-checker-data:
               type: anitya
