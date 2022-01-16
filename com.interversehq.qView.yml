@@ -83,6 +83,7 @@ modules:
         buildsystem: cmake
         config-opts:
           - -DAVIF_BUILD_GDK_PIXBUF=OFF
+          - -DAVIF_CODEC_AOM=ON
         sources:
           - type: git
             url: https://github.com/AOMediaCodec/libavif.git
