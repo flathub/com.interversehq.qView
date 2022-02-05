@@ -15,8 +15,67 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DKIMAGEFORMATS_JXL=ON
       - -DKIMAGEFORMATS_HEIF=ON
     modules:
+      - name: libavif
+        buildsystem: cmake
+        config-opts:
+          - -DAVIF_BUILD_GDK_PIXBUF=OFF
+          - -DAVIF_CODEC_AOM=ON
+        sources:
+          - type: git
+            url: https://github.com/AOMediaCodec/libavif.git
+            tag: v0.9.3
+            commit: ac76fe0d16a255bccefff5bdfddd865742176d85
+            x-checker-data:
+              type: anitya
+              project-id: 178015
+              stable-only: true
+              tag-template: v$version
+          - type: shell
+            commands:
+              - sed -i 's|DESTINATION ${GDK_PIXBUF_MODULEDIR}|DESTINATION /app/lib/gdk-pixbuf-2.0/2.10.0/loaders|'
+                contrib/gdk-pixbuf/CMakeLists.txt
+
+      - name: openexr
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DOPENEXR_BUILD_TOOLS=OFF
+          - -DOPENEXR_INSTALL_EXAMPLES=OFF
+          - -DOPENEXR_INSTALL_TOOLS=OFF
+          - -DDOCS=OFF
+        cleanup:
+          - /bin
+          - /share/doc
+        modules: 
+          - name: imath
+            buildsystem: cmake-ninja
+            config-opts:
+              - -DBUILD_LIB_STATIC=OFF
+              - -DBUILD_TESTING=OFF
+            sources:
+              - type: archive
+                url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.3.tar.gz
+                sha256: 0bf7ec51162c4d17a4c5b850fb3f6f7a195cff9fa71f4da7735f74d7b5124320
+                x-checker-data:
+                  type: anitya
+                  project-id: 223366
+                  stable-only: true
+                  url-template: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v$version.tar.gz
+            cleanup:
+              - /include/Imath
+              - /lib/pkgconfig/Imath.pc
+        sources:
+          - type: archive
+            url: https://github.com/openexr/openexr/archive/v3.1.4/openexr-3.1.4.tar.gz
+            sha256: cb019c3c69ada47fe340f7fa6c8b863ca0515804dc60bdb25c942c1da886930b
+            x-checker-data:
+              type: anitya
+              project-id: 13289
+              stable-only: true
+              url-template: https://github.com/openexr/openexr/releases/download/v$version/openexr-$version.tar.gz
+
       - name: libheif
         config-opts:
           - --disable-gdk-pixbuf
@@ -64,11 +123,11 @@ modules:
               - type: archive
                 url: https://github.com/google/highway/archive/refs/tags/0.15.0.tar.gz
                 sha256: 4bbd4439eae08cf038f1c5cc5d9ebc6a1a50f2c610c13a1483adccacfa24c150
-            x-checker-data:
-              type: anitya
-              project-id: 205809
-              stable-only: true
-              url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
+                x-checker-data:
+                  type: anitya
+                  project-id: 205809
+                  stable-only: true
+                  url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
         sources:
           - type: git
             url: https://github.com/libjxl/libjxl.git
@@ -79,44 +138,28 @@ modules:
               stable-only: true
               tag-template: v$version
 
-      - name: libavif
-        buildsystem: cmake
-        config-opts:
-          - -DAVIF_BUILD_GDK_PIXBUF=OFF
-          - -DAVIF_CODEC_AOM=ON
-        sources:
-          - type: git
-            url: https://github.com/AOMediaCodec/libavif.git
-            tag: v0.9.3
-            commit: ac76fe0d16a255bccefff5bdfddd865742176d85
-            x-checker-data:
-              type: anitya
-              project-id: 178015
-              stable-only: true
-              tag-template: v$version
-
       - name: karchive
         buildsystem: cmake-ninja
         config-opts:
           - -DBUILD_TESTING=OFF
         sources:
           - type: archive
-            url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.9/karchive-5.9.0.tar.xz
-            sha256: 3fa1fd34e6a9f90b00dc877e7e8bc0fe033ff6ad8693e78e9cee1c9e9f01b0b2
+            url: https://download.kde.org/stable/frameworks/5.90/karchive-5.90.0.tar.xz
+            sha256: a6e2f3a7cb1aef7db7b4f7dfb9ffb1d929d0d5b147c25a93fbc0b794dfcd2110
             x-checker-data:
               type: anitya
               project-id: 8762
               stable-only: true
-              url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/karchive-$version.tar.xz
+              url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.9/kimageformats-5.9.0.tar.xz
-        sha256: afae002076702bd4b5509a4cea43161d409bda6b2de6797023d9f90bc3cc9984
+        url: https://download.kde.org/stable/frameworks/5.90/kimageformats-5.90.0.tar.xz
+        sha256: 3bec943c0eee38f34dba4dcf8c0e5056e25fc309691dbbb002c241e0e9847164
         x-checker-data:
           type: anitya
           project-id: 8762
           stable-only: true
-          url-template: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/$major.$minor/kimageformats-$version.tar.xz
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
 
   - name: qview
     buildsystem: qmake
