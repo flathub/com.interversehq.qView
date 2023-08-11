@@ -17,3 +17,8 @@ modules:
       - type: archive
         url: https://github.com/jurplel/qView/releases/download/5.0/qView-5.0.tar.gz
         sha256: 2d09b0bd0c439aacbd02613b0dd5c2e9f8f5458739717f86288addcdb6225245
+        x-checker-data:
+          type: anitya
+          project-id: 243178
+          stable-only: true
+          url-template: https://github.com/jurplel/qView/releases/download/$version/qView-$version.tar.gz
