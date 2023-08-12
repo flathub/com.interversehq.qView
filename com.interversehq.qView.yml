@@ -1,6 +1,6 @@
 app-id: com.interversehq.qView
 runtime: org.kde.Platform
-runtime-version: '5.15-22.08'
+runtime-version: 5.15-22.08
 sdk: org.kde.Sdk
 command: qview
 finish-args:
@@ -15,8 +15,8 @@ modules:
     buildsystem: qmake
     sources:
       - type: archive
-        url: https://github.com/jurplel/qView/releases/download/5.0/qView-5.0.tar.gz
-        sha256: 2d09b0bd0c439aacbd02613b0dd5c2e9f8f5458739717f86288addcdb6225245
+        url: https://github.com/jurplel/qView/releases/download/6.0/qView-6.0.tar.gz
+        sha256: 919e8111bb0fd3ef186dd9b286371304275f21fbad31288c3578e17f3824f84d
         x-checker-data:
           type: anitya
           project-id: 243178
