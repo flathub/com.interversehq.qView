@@ -1,6 +1,6 @@
 app-id: com.interversehq.qView
 runtime: org.kde.Platform
-runtime-version: 6.5
+runtime-version: 5.15-22.08
 sdk: org.kde.Sdk
 command: qview
 finish-args:
@@ -11,6 +11,17 @@ finish-args:
   - --share=network
   - --device=dri
 modules:
+  - name: kimageformats
+    buildsystem: cmake
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.110/kimageformats-5.110.0.tar.xz
+        sha256: 8d69fbd8a8fb6212bc35ee5cba45c1b5b6b3e0e864010bf235a2bd2998d07347
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
   - name: qview
     buildsystem: qmake
     sources:
