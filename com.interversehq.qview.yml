@@ -15,10 +15,10 @@ modules:
     buildsystem: qmake
     sources:
       - type: archive
-        url: https://github.com/jurplel/qView/releases/download/6.1/qView-6.1.tar.gz
-        sha256: 0d7ab3aaea2e9f89034bdeeb6350d31a5d9fb5ac9158b98348e8ccbf1dc6570a
+        url: https://github.com/jurplel/qView/archive/refs/tags/7.1.tar.gz
+        sha256: 89189b508b60526af09a15bc7b467eecb7f3d074f5dd21d251afe23406b24e8a
         x-checker-data:
           type: anitya
           project-id: 243178
           stable-only: true
-          url-template: https://github.com/jurplel/qView/releases/download/$version/qView-$version.tar.gz
+          url-template: https://github.com/jurplel/qView/archive/refs/tags/$version.tar.gz
